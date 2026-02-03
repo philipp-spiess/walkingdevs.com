@@ -1,0 +1,29 @@
+---
+import PodcastLinks from './PodcastLinks.astro'
+
+interface Props {
+  title: string
+  description: string
+  coverUrl: string
+}
+
+const { title, description, coverUrl } = Astro.props
+---
+
+<header class="flex flex-col sm:flex-row items-center sm:items-start gap-6 sm:gap-8 mb-12">
+  <a href="/" class="shrink-0 relative">
+    <img
+      src={coverUrl}
+      alt={title}
+      class="w-36 h-36 sm:w-44 sm:h-44 rounded-lg"
+      width="176"
+      height="176"
+    />
+    <div class="absolute inset-0 rounded-lg ring-1 ring-inset ring-black/10"></div>
+  </a>
+  <div class="text-center sm:text-left">
+    <h1 class="text-2xl sm:text-3xl font-bold mb-2">{title}</h1>
+    <p class="text-base sm:text-lg text-gray-600 mb-4">{description}</p>
+    <PodcastLinks size="sm" />
+  </div>
+</header>

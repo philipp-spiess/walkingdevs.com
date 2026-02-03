@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import Header from '../components/Header.astro'
+import EpisodeCard from '../components/EpisodeCard.astro'
+import Hosts from '../components/Hosts.astro'
+import { fetchPodcastData } from '../lib/rss'
+
+export const prerender = true
+
+const podcast = await fetchPodcastData()
+---
+
+<BaseLayout title={podcast.title} description={podcast.description}>
+  <main class="max-w-2xl mx-auto px-4 py-8 sm:py-12">
+    <Header title={podcast.title} description={podcast.description} coverUrl={podcast.coverUrl} />
+
+    <section>
+      <h2 class="sr-only">Episodes</h2>
+      <div class="divide-y divide-gray-200">
+        {podcast.episodes.map((episode) => <EpisodeCard episode={episode} />)}
+      </div>
+    </section>
+
+    <footer class="mt-12 pt-8 border-t border-gray-200">
+      <h3 class="text-sm font-medium text-gray-500 mb-4 text-center sm:text-left">Your hosts</h3>
+      <Hosts />
+    </footer>
+  </main>
+</BaseLayout>

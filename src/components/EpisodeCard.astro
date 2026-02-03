@@ -1,0 +1,41 @@
+---
+import { format } from 'date-fns'
+import type { Episode } from '../lib/types'
+
+interface Props {
+  episode: Episode
+}
+
+const { episode } = Astro.props
+const formattedDate = format(episode.publishedAt, 'MMM d, yyyy')
+const episodeNumber = episode.episodeNumber.toString().padStart(3, '0')
+---
+
+<article class="py-6 border-b border-gray-200 last:border-b-0">
+  <a href={`/${episode.slug}`} class="block group">
+    <div class="flex items-start gap-4">
+      <span class="text-sm font-mono text-gray-400 mt-9">{episodeNumber}</span>
+      <div class="flex-1 min-w-0 gap-2 flex flex-col">
+        <div class="flex items-center gap-1.5 text-sm text-gray-500 mt-1">
+          <time datetime={episode.publishedAt.toISOString()}>{formattedDate}</time>
+          {episode.duration && (
+            <>
+              <span class="text-gray-400">·</span>
+              <span>{episode.duration}</span>
+            </>
+          )}
+        </div>
+        <h2
+          class="text-lg sm:text-xl font-semibold text-gray-900 group-hover:text-blue-600 transition-colors"
+        >
+          {episode.title}
+        </h2>
+        {
+          episode.description && (
+            <p class="text-gray-600 line-clamp-2">{episode.description}</p>
+          )
+        }
+      </div>
+    </div>
+  </a>
+</article>

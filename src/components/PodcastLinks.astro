@@ -1,0 +1,72 @@
+---
+interface Props {
+  rssUrl?: string
+  size?: 'sm' | 'md'
+  iconOnly?: boolean
+  centered?: boolean
+}
+
+const { rssUrl = '/rss.xml', size = 'md', iconOnly = false, centered = false } = Astro.props
+
+// Placeholder links - replace with actual URLs
+const appleUrl = '#apple-podcasts'
+const spotifyUrl = '#spotify'
+
+const btnClass = iconOnly
+  ? 'inline-flex items-center justify-center w-9 h-9 rounded-full'
+  : size === 'sm'
+    ? 'inline-flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-md'
+    : 'inline-flex items-center gap-2 px-4 py-2 rounded-lg'
+
+const iconClass = iconOnly ? 'w-4 h-4' : size === 'sm' ? 'w-4 h-4' : 'w-5 h-5'
+const wrapperClass = centered
+  ? 'flex flex-wrap justify-center gap-2 sm:gap-3'
+  : 'flex flex-wrap justify-center sm:justify-start gap-2 sm:gap-3'
+---
+
+<div class={wrapperClass}>
+  <a
+    href={appleUrl}
+    class:list={[btnClass, 'bg-gray-900 text-white hover:bg-gray-800 transition-colors']}
+    target="_blank"
+    rel="noopener noreferrer"
+    title="Apple Podcasts"
+  >
+    <svg class={iconClass} viewBox="0 0 24 24" fill="currentColor">
+      <path
+        d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.1 22C7.79 22.05 6.8 20.68 5.96 19.47C4.25 17 2.94 12.45 4.7 9.39C5.57 7.87 7.13 6.91 8.82 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"
+      ></path>
+    </svg>
+    {!iconOnly && 'Apple Podcasts'}
+  </a>
+
+  <a
+    href={spotifyUrl}
+    class:list={[btnClass, 'bg-[#1DB954] text-white hover:bg-[#1ed760] transition-colors']}
+    target="_blank"
+    rel="noopener noreferrer"
+    title="Spotify"
+  >
+    <svg class={iconClass} viewBox="0 0 24 24" fill="currentColor">
+      <path
+        d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"
+      ></path>
+    </svg>
+    {!iconOnly && 'Spotify'}
+  </a>
+
+  <a
+    href={rssUrl}
+    class:list={[btnClass, 'border border-gray-300 text-gray-700 hover:bg-gray-100 transition-colors']}
+    target="_blank"
+    rel="noopener noreferrer"
+    title="RSS Feed"
+  >
+    <svg class={iconClass} viewBox="0 0 24 24" fill="currentColor">
+      <path
+        d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1Z"
+      ></path>
+    </svg>
+    {!iconOnly && 'RSS'}
+  </a>
+</div>

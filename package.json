@@ -1,0 +1,21 @@
+{
+  "name": "walkingdevs",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "^12.6.12",
+    "@cloudflare/pages-plugin-vercel-og": "^0.1.2",
+    "@tailwindcss/vite": "^4.1.18",
+    "astro": "^5.17.1",
+    "date-fns": "^4.1.0",
+    "fast-xml-parser": "^5.3.4",
+    "tailwindcss": "^4.0.0",
+    "wavesurfer.js": "^7.12.1"
+  }
+}
