@@ -19,11 +19,11 @@ const { title, description, coverUrl } = Astro.props
       width="176"
       height="176"
     />
-    <div class="absolute inset-0 rounded-lg ring-1 ring-inset ring-black/10"></div>
+    <div class="absolute inset-0 rounded-lg ring-1 ring-inset ring-black/10 dark:ring-white/10"></div>
   </a>
   <div class="text-center sm:text-left">
     <h1 class="text-2xl sm:text-3xl font-bold mb-2">{title}</h1>
-    <p class="text-base sm:text-lg text-gray-600 mb-4">{description}</p>
+    <p class="text-base sm:text-lg text-neutral-600 dark:text-neutral-400 mb-4">{description}</p>
     <PodcastLinks size="sm" />
   </div>
 </header>

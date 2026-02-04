@@ -28,11 +28,11 @@ const hosts = [
         height="48"
       />
       <div>
-        <h3 class="font-medium text-gray-900">{host.name}</h3>
+        <h3 class="font-medium text-neutral-900 dark:text-neutral-100">{host.name}</h3>
         <div class="flex gap-3 mt-1">
           <a
             href={host.website}
-            class="text-gray-400 hover:text-gray-600 transition-colors"
+            class="text-neutral-400 hover:text-neutral-600 dark:text-neutral-500 dark:hover:text-neutral-300 transition-colors"
             target="_blank"
             rel="noopener noreferrer"
             title="Website"
@@ -46,7 +46,7 @@ const hosts = [
           {host.twitter && (
             <a
               href={host.twitter}
-              class="text-gray-400 hover:text-gray-600 transition-colors"
+              class="text-neutral-400 hover:text-neutral-600 dark:text-neutral-500 dark:hover:text-neutral-300 transition-colors"
               target="_blank"
               rel="noopener noreferrer"
               title="Twitter"
@@ -59,7 +59,7 @@ const hosts = [
           {host.bluesky && (
             <a
               href={host.bluesky}
-              class="text-gray-400 hover:text-gray-600 transition-colors"
+              class="text-neutral-400 hover:text-neutral-600 dark:text-neutral-500 dark:hover:text-neutral-300 transition-colors"
               target="_blank"
               rel="noopener noreferrer"
               title="Bluesky"
@@ -71,7 +71,7 @@ const hosts = [
           )}
           <a
             href={host.linkedin}
-            class="text-gray-400 hover:text-gray-600 transition-colors"
+            class="text-neutral-400 hover:text-neutral-600 dark:text-neutral-500 dark:hover:text-neutral-300 transition-colors"
             target="_blank"
             rel="noopener noreferrer"
             title="LinkedIn"

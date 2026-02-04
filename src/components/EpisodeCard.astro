@@ -11,28 +11,28 @@ const formattedDate = format(episode.publishedAt, 'MMM d, yyyy')
 const episodeNumber = episode.episodeNumber.toString().padStart(3, '0')
 ---
 
-<article class="py-6 border-b border-gray-200 last:border-b-0">
+<article class="py-6 border-b border-neutral-200 dark:border-neutral-700 last:border-b-0">
   <a href={`/${episode.slug}`} class="block group">
     <div class="flex items-start gap-4">
-      <span class="text-sm font-mono text-gray-400 mt-9">{episodeNumber}</span>
+      <span class="text-sm font-mono text-neutral-400 dark:text-neutral-500 mt-9">{episodeNumber}</span>
       <div class="flex-1 min-w-0 gap-2 flex flex-col">
-        <div class="flex items-center gap-1.5 text-sm text-gray-500 mt-1">
+        <div class="flex items-center gap-1.5 text-sm text-neutral-500 dark:text-neutral-400 mt-1">
           <time datetime={episode.publishedAt.toISOString()}>{formattedDate}</time>
           {episode.duration && (
             <>
-              <span class="text-gray-400">·</span>
+              <span class="text-neutral-400 dark:text-neutral-500">·</span>
               <span>{episode.duration}</span>
             </>
           )}
         </div>
         <h2
-          class="text-lg sm:text-xl font-semibold text-gray-900 group-hover:text-blue-600 transition-colors"
+          class="text-lg sm:text-xl font-semibold text-neutral-900 dark:text-neutral-100 group-hover:text-neutral-600 dark:group-hover:text-white transition-colors"
         >
           {episode.title}
         </h2>
         {
           episode.description && (
-            <p class="text-gray-600 line-clamp-2">{episode.description}</p>
+            <p class="text-neutral-600 dark:text-neutral-400 line-clamp-2">{episode.description}</p>
           )
         }
       </div>

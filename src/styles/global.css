@@ -9,6 +9,12 @@ html {
 }
 
 body {
-  @apply text-gray-900 antialiased;
+  @apply text-neutral-900 dark:text-neutral-100 antialiased;
   background-color: #FFFEFA;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #1a1917;
+  }
 }

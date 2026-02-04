@@ -18,7 +18,7 @@ const playerId = `player-${Math.random().toString(36).slice(2, 9)}`
     <!-- Play button and speed control -->
     <div class="shrink-0 flex flex-col items-center gap-1">
       <button
-        class="play-btn w-12 h-12 flex items-center justify-center bg-gray-900 text-white rounded-full hover:bg-gray-800 transition-colors"
+        class="play-btn w-12 h-12 flex items-center justify-center bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900 rounded-full hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors"
         aria-label="Play episode"
       >
         <svg class="play-icon w-5 h-5 ml-0.5" viewBox="0 0 24 24" fill="currentColor">
@@ -29,7 +29,7 @@ const playerId = `player-${Math.random().toString(36).slice(2, 9)}`
         </svg>
       </button>
       <button
-        class="speed-btn text-xs text-gray-500 hover:text-gray-900 font-medium transition-colors"
+        class="speed-btn text-xs text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 font-medium transition-colors"
         aria-label="Change playback speed"
       >
         1x
@@ -44,7 +44,7 @@ const playerId = `player-${Math.random().toString(36).slice(2, 9)}`
 
       <div id={playerId} class="waveform h-12"></div>
 
-      <div class="flex justify-between text-xs text-gray-500 mt-1">
+      <div class="flex justify-between text-xs text-neutral-500 dark:text-neutral-400 mt-1">
         <span class="time-current">0:00</span>
         <span class="time-total">{duration}</span>
       </div>
@@ -83,18 +83,30 @@ const playerId = `player-${Math.random().toString(36).slice(2, 9)}`
 
     let currentSpeedIndex = 0
 
+    const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+
     const wavesurfer = WaveSurfer.create({
       container: waveformEl,
-      waveColor: '#d1d5db',
-      progressColor: '#1f2937',
+      waveColor: isDark ? '#525252' : '#d4d4d4',
+      progressColor: isDark ? '#e5e5e5' : '#262626',
       height: 48,
       barWidth: 3,
       barGap: 2,
       barRadius: 2,
       cursorWidth: 1,
-      cursorColor: '#1f2937',
+      cursorColor: isDark ? '#e5e5e5' : '#262626',
       media: audioEl,
       peaks: [peaks],
+    })
+
+    // Update colors when color scheme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      const dark = e.matches
+      wavesurfer.setOptions({
+        waveColor: dark ? '#525252' : '#d4d4d4',
+        progressColor: dark ? '#e5e5e5' : '#262626',
+        cursorColor: dark ? '#e5e5e5' : '#262626',
+      })
     })
 
     wavesurfer.on('ready', () => {

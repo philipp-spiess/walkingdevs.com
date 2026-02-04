@@ -29,7 +29,7 @@ const peaks = generatePeaks(episode.slug)
 >
   <main class="max-w-2xl mx-auto px-4 py-8 sm:py-12">
     <nav class="mb-6 sm:mb-8">
-      <a href="/" class="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900">
+      <a href="/" class="inline-flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100">
         <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M19 12H5M12 19l-7-7 7-7"></path>
         </svg>
@@ -47,10 +47,10 @@ const peaks = generatePeaks(episode.slug)
             width="120"
             height="120"
           />
-          <div class="absolute inset-0 rounded-lg ring-1 ring-inset ring-black/10"></div>
+          <div class="absolute inset-0 rounded-lg ring-1 ring-inset ring-black/10 dark:ring-white/10"></div>
         </div>
         <div class="min-w-0">
-          <time datetime={episode.publishedAt.toISOString()} class="text-sm text-gray-500">
+          <time datetime={episode.publishedAt.toISOString()} class="text-sm text-neutral-500 dark:text-neutral-400">
             {formattedDate}
           </time>
           <h1 class="text-xl sm:text-2xl font-bold mt-1">
@@ -70,14 +70,14 @@ const peaks = generatePeaks(episode.slug)
 
       {
         episode.description && (
-          <div class="prose prose-gray max-w-none">
+          <div class="prose prose-neutral dark:prose-invert max-w-none">
             <p>{episode.description}</p>
           </div>
         )
       }
 
-      <footer class="mt-12 pt-8 border-t border-gray-200">
-        <h3 class="text-sm font-medium text-gray-500 mb-4 text-center sm:text-left">Your hosts</h3>
+      <footer class="mt-12 pt-8 border-t border-neutral-200 dark:border-neutral-700">
+        <h3 class="text-sm font-medium text-neutral-500 dark:text-neutral-400 mb-4 text-center sm:text-left">Your hosts</h3>
         <Hosts />
       </footer>
     </article>
