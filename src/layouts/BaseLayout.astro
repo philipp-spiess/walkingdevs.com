@@ -47,4 +47,44 @@ const canonicalUrl = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
   <body class="min-h-screen">
     <slot />
   </body>
+  <script>
+    import { log, setUrl } from '@logkit/client'
+
+    setUrl('https://walkingdevs.logk.it/')
+
+    let lastPath: string | null = null
+
+    function trackPageview() {
+      if (lastPath === window.location.pathname) return
+      lastPath = window.location.pathname
+
+      const url = new URL(window.location.href)
+      const utmParams: Record<string, string> = {}
+
+      ;['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'].forEach((key) => {
+        const value = url.searchParams.get(key)
+        if (value) utmParams[key] = value
+      })
+
+      log('pageview', {
+        origin: window.location.origin,
+        pathname: window.location.pathname,
+        referrer: document.referrer,
+        ...utmParams,
+      })
+    }
+
+    // Initial pageview
+    trackPageview()
+
+    // Client-side navigation (SPA routers / View Transitions)
+    const originalPushState = history.pushState
+    history.pushState = function (...args) {
+      originalPushState.apply(this, args)
+      trackPageview()
+    }
+
+    // Back/forward buttons
+    window.addEventListener('popstate', trackPageview)
+  </script>
 </html>

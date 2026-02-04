@@ -3,9 +3,10 @@ interface Props {
   audioUrl: string
   duration: string
   peaks: number[]
+  slug: string
 }
 
-const { audioUrl, duration, peaks } = Astro.props
+const { audioUrl, duration, peaks, slug } = Astro.props
 const playerId = `player-${Math.random().toString(36).slice(2, 9)}`
 ---
 
@@ -13,6 +14,7 @@ const playerId = `player-${Math.random().toString(36).slice(2, 9)}`
   class="audio-player mb-8"
   data-player-id={playerId}
   data-peaks={JSON.stringify(peaks)}
+  data-slug={slug}
 >
   <div class="flex items-center gap-4">
     <!-- Play button and speed control -->
@@ -54,6 +56,9 @@ const playerId = `player-${Math.random().toString(36).slice(2, 9)}`
 
 <script>
   import WaveSurfer from 'wavesurfer.js'
+  import { log, setUrl } from '@logkit/client'
+
+  setUrl('https://walkingdevs.logk.it/')
 
   const SPEEDS = [1, 1.25, 1.5, 2]
 
@@ -67,12 +72,17 @@ const playerId = `player-${Math.random().toString(36).slice(2, 9)}`
   function initPlayer(container: Element) {
     const playerId = container.getAttribute('data-player-id')
     const peaksJson = container.getAttribute('data-peaks')
+    const slug = container.getAttribute('data-slug')
     const waveformEl = container.querySelector('.waveform') as HTMLElement
     const audioEl = container.querySelector('audio') as HTMLAudioElement
 
-    if (!playerId || !waveformEl || !audioEl || !peaksJson) return
+    if (!playerId || !waveformEl || !audioEl || !peaksJson || !slug) return
 
     const peaks = JSON.parse(peaksJson) as number[]
+
+    // Tracking state
+    let hasTrackedPlay = false
+    let hasTracked60s = false
 
     const playBtn = container.querySelector('.play-btn')
     const playIcon = container.querySelector('.play-icon')
@@ -132,6 +142,12 @@ const playerId = `player-${Math.random().toString(36).slice(2, 9)}`
     wavesurfer.on('play', () => {
       playIcon?.classList.add('hidden')
       pauseIcon?.classList.remove('hidden')
+
+      // Track play event (once per session)
+      if (!hasTrackedPlay) {
+        hasTrackedPlay = true
+        log('play', { slug })
+      }
     })
 
     wavesurfer.on('pause', () => {
@@ -142,6 +158,12 @@ const playerId = `player-${Math.random().toString(36).slice(2, 9)}`
     wavesurfer.on('timeupdate', (currentTime) => {
       if (timeCurrent) {
         timeCurrent.textContent = formatTime(currentTime)
+      }
+
+      // Track 60s listen milestone (once per session)
+      if (!hasTracked60s && currentTime >= 60) {
+        hasTracked60s = true
+        log('listen_60s', { slug })
       }
     })
 

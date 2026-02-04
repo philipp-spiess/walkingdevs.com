@@ -7,6 +7,7 @@
       "dependencies": {
         "@astrojs/cloudflare": "^12.6.12",
         "@cloudflare/pages-plugin-vercel-og": "^0.1.2",
+        "@logkit/client": "^0.0.0-0f0272d",
         "@tailwindcss/vite": "^4.1.18",
         "astro": "^5.17.1",
         "date-fns": "^4.1.0",
@@ -174,6 +175,8 @@
     "@jridgewell/sourcemap-codec": ["@jridgewell/sourcemap-codec@1.5.5", "", {}, "sha512-cYQ9310grqxueWbl+WuIUIaiUaDcj7WOq5fVhEljNVgRfOUhY9fy2zTvfoqWsnebh8Sl70VScFbICvJnLKB0Og=="],
 
     "@jridgewell/trace-mapping": ["@jridgewell/trace-mapping@0.3.31", "", { "dependencies": { "@jridgewell/resolve-uri": "^3.1.0", "@jridgewell/sourcemap-codec": "^1.4.14" } }, "sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw=="],
+
+    "@logkit/client": ["@logkit/client@0.0.0-0f0272d", "", {}, "sha512-ZNwOEDxSoCnb2BwR0fKH3turBs8aR/M+SpkV5Wkdzg4u/+CjBS2WHyRRQ0c+jlVXsAL4zcOEck+AYj2EI0kvbQ=="],
 
     "@oslojs/encoding": ["@oslojs/encoding@1.1.0", "", {}, "sha512-70wQhgYmndg4GCPxPPxPGevRKqTIJ2Nh4OkiMWmDAVYsTQ+Ta7Sq+rPevXyXGdzr30/qZBnyOalCszoMxlyldQ=="],
 
