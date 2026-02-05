@@ -97,7 +97,7 @@ export async function fetchPodcastData(): Promise<PodcastInfo> {
     title: channel.title,
     description: stripHtml(channel.description),
     author: channel['itunes:author'] || '',
-    coverUrl: channel['itunes:image']?.['@_href'] || '',
+    coverUrl: '/cover.png',
     episodes,
   }
 }
