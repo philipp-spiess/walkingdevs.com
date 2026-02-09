@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    # GitHub cron is UTC. 08:10 UTC = 09:10 GMT+1 (Tuesday)
+    - cron: '10 8 * * 2'
 
 jobs:
   deploy:
