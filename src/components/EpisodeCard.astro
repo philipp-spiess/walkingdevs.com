@@ -1,5 +1,5 @@
 ---
-import { format } from 'date-fns'
+import { formatShortDateInVienna } from '../lib/date'
 import type { Episode } from '../lib/types'
 
 interface Props {
@@ -7,7 +7,7 @@ interface Props {
 }
 
 const { episode } = Astro.props
-const formattedDate = format(episode.publishedAt, 'MMM d, yyyy')
+const formattedDate = formatShortDateInVienna(episode.publishedAt)
 const episodeNumber = episode.episodeNumber.toString().padStart(3, '0')
 ---
 

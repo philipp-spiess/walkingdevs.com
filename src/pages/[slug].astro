@@ -5,7 +5,7 @@ import PodcastLinks from '../components/PodcastLinks.astro'
 import Hosts from '../components/Hosts.astro'
 import { fetchPodcastData } from '../lib/rss'
 import { generatePeaks } from '../lib/waveform'
-import { format } from 'date-fns'
+import { formatLongDateInVienna } from '../lib/date'
 
 export async function getStaticPaths() {
   const podcast = await fetchPodcastData()
@@ -17,7 +17,7 @@ export async function getStaticPaths() {
 }
 
 const { episode, podcast } = Astro.props
-const formattedDate = format(episode.publishedAt, 'MMMM d, yyyy')
+const formattedDate = formatLongDateInVienna(episode.publishedAt)
 const episodeNumber = episode.episodeNumber.toString().padStart(3, '0')
 const peaks = generatePeaks(episode.slug)
 ---
