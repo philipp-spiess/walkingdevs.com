@@ -2,6 +2,8 @@ import type { APIRoute, GetStaticPaths } from 'astro'
 import { ImageResponse } from '@cloudflare/pages-plugin-vercel-og/api'
 import { fetchPodcastData } from '../../lib/rss'
 
+const SITE_URL = 'https://walkingdevs.com'
+
 export const prerender = true
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -20,6 +22,7 @@ export const GET: APIRoute = async ({ params }) => {
   }
 
   const episodeNumber = episode.episodeNumber.toString().padStart(3, '0')
+  const coverImageUrl = new URL(podcast.coverUrl, SITE_URL).toString()
 
   const html = {
     type: 'div',
@@ -46,7 +49,7 @@ export const GET: APIRoute = async ({ params }) => {
               {
                 type: 'img',
                 props: {
-                  src: podcast.coverUrl,
+                  src: coverImageUrl,
                   width: 120,
                   height: 120,
                   style: {
