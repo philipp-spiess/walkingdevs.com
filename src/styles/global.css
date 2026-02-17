@@ -18,3 +18,16 @@ body {
     background-color: #1a1917;
   }
 }
+
+.prose p + p {
+  margin-top: 0.5rem;
+}
+
+.prose a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.prose a:hover {
+  @apply text-neutral-600 dark:text-white;
+}

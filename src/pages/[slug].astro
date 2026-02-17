@@ -71,7 +71,7 @@ const peaks = generatePeaks(episode.slug)
 
       {
         episode.descriptionHtml && (
-          <div class="prose prose-neutral dark:prose-invert max-w-none" set:html={episode.descriptionHtml} />
+          <div class="prose" set:html={episode.descriptionHtml} />
         )
       }
 
