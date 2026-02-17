@@ -36,6 +36,13 @@ function stripHtml(html: string): string {
   return html.replace(/<[^>]*>/g, '').trim()
 }
 
+function sanitizeHtml(html: string): string {
+  // Only allow <p>, <a>, and <br> tags — strip everything else
+  return html
+    .replace(/<(?!\/?(?:p|a|br)\b)[^>]*>/gi, '')
+    .trim()
+}
+
 function formatDuration(duration: string | undefined): string {
   if (!duration) return ''
 
@@ -81,11 +88,14 @@ export async function fetchPodcastData(): Promise<PodcastInfo> {
     .map((item) => {
       const { number, title, slug } = parseEpisodeTitle(item.title)
 
+      const rawHtml = item['itunes:summary'] || item.description || ''
+
       return {
         episodeNumber: number,
         title,
         slug,
-        description: stripHtml(item['itunes:summary'] || item.description || ''),
+        description: stripHtml(rawHtml),
+        descriptionHtml: sanitizeHtml(rawHtml),
         publishedAt: new Date(item.pubDate),
         audioUrl: item.enclosure['@_url'],
         duration: formatDuration(item['itunes:duration']),

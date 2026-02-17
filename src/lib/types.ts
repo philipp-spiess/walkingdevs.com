@@ -3,6 +3,7 @@ export interface Episode {
   title: string
   slug: string
   description: string
+  descriptionHtml: string
   publishedAt: Date
   audioUrl: string
   duration: string
